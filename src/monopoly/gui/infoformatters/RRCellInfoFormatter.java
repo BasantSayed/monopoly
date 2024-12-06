@@ -5,8 +5,14 @@ import monopoly.Player;
 import monopoly.cells.RailRoadCell;
 import monopoly.gui.CellInfoFormatter;
 
+/**
+ * Class RRCellInfoFormatter: Description of its purpose.
+ */
 public class RRCellInfoFormatter implements CellInfoFormatter {
     @Override
+/**
+ * Method format: Description of its purpose.
+ */
     public String format(Cell cell) {
         StringBuilder buf = new StringBuilder();
         buf.append("<html><b><font color='lime'>")
@@ -17,6 +23,9 @@ public class RRCellInfoFormatter implements CellInfoFormatter {
     }
     
     @Override
+/**
+ * Method formatToolTip: Description of its purpose.
+ */
     public String formatToolTip(Cell cell) {
         RailRoadCell c = (RailRoadCell)cell;
         StringBuilder buf = new StringBuilder();

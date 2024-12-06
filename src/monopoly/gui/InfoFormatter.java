@@ -20,6 +20,9 @@ import monopoly.gui.infoformatters.PropertyCellInfoFormatter;
 import monopoly.gui.infoformatters.RRCellInfoFormatter;
 import monopoly.gui.infoformatters.UtilCellInfoFormatter;
 
+/**
+ * Class InfoFormatter: Description of its purpose.
+ */
 public class InfoFormatter {
     static Map<Object, CellInfoFormatter> cellInfoFormatters;
     
@@ -28,6 +31,9 @@ public class InfoFormatter {
         addFormatters();
     }
 
+/**
+ * Method addFormatters: Description of its purpose.
+ */
     private static void addFormatters() {
         cellInfoFormatters.put(PropertyCell.class, new PropertyCellInfoFormatter());
         cellInfoFormatters.put(GoCell.class, new GoCellInfoFormatter());
@@ -39,11 +45,17 @@ public class InfoFormatter {
         cellInfoFormatters.put(CardCell.class, new CCCellInfoFormatter());
     }
 
+/**
+ * Method cellInfo: Description of its purpose.
+ */
     public static String cellInfo(Cell cell) {
         CellInfoFormatter formatter = cellInfoFormatters.get(cell.getClass());
         return formatter.format(cell);
     }
 
+/**
+ * Method cellToolTip: Description of its purpose.
+ */
     public static String cellToolTip(Cell cell) {
         CellInfoFormatter formatter = cellInfoFormatters.get(cell.getClass());
         return formatter.formatToolTip(cell);

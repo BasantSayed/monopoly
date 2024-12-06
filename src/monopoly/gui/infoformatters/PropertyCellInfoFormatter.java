@@ -5,8 +5,14 @@ import monopoly.Player;
 import monopoly.cells.PropertyCell;
 import monopoly.gui.CellInfoFormatter;
 
+/**
+ * Class PropertyCellInfoFormatter: Description of its purpose.
+ */
 public class PropertyCellInfoFormatter implements CellInfoFormatter {
     @Override
+/**
+ * Method format: Description of its purpose.
+ */
     public String format(Cell cell) {
         PropertyCell c = (PropertyCell)cell;
         StringBuilder buf = new StringBuilder();
@@ -20,6 +26,9 @@ public class PropertyCellInfoFormatter implements CellInfoFormatter {
     }
     
     @Override
+/**
+ * Method formatToolTip: Description of its purpose.
+ */
     public String formatToolTip(Cell cell) {
         PropertyCell c = (PropertyCell)cell;
         StringBuilder buf = new StringBuilder();

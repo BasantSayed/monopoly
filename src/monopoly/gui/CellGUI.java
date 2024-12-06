@@ -11,12 +11,18 @@ import monopoly.Cell;
 import monopoly.MainController;
 import monopoly.Player;
 
+/**
+ * Class CellGUI: Description of its purpose.
+ */
 public class CellGUI extends JPanel {
     private static final long serialVersionUID = 2752137388247147409L;
     private final Cell cell;
     private JLabel infoLabel;
     private final JLabel[] playersLabel = new JLabel[BoardController.MAX_PLAYER];
     
+/**
+ * Method CellGUI: Description of its purpose.
+ */
     public CellGUI(Cell cell) {
         this.cell = cell;
         super.setLayout(new OverlayLayout(this));
@@ -32,6 +38,9 @@ public class CellGUI extends JPanel {
         super.doLayout();
     }
 	
+/**
+ * Method addCellInfo: Description of its purpose.
+ */
     private void addCellInfo() {
         infoLabel = new JLabel();
         displayInfo();
@@ -41,12 +50,18 @@ public class CellGUI extends JPanel {
         add(infoPanel);
     }
 	
+/**
+ * Method addPlayer: Description of its purpose.
+ */
     public void addPlayer(MainController mainController, int index) {
         Player player = mainController.getPlayer(index);
         playersLabel[index].setOpaque(true);
         playersLabel[index].setBackground(player.getPlayerColor());
     }
 
+/**
+ * Method createPlayerLabels: Description of its purpose.
+ */
     private void createPlayerLabels(JPanel playerPanel) {
         for (int i = 0; i < BoardController.MAX_PLAYER; i++) {
             playersLabel[i] = new JLabel();
@@ -55,6 +70,9 @@ public class CellGUI extends JPanel {
         }
     }
 
+/**
+ * Method displayInfo: Description of its purpose.
+ */
     public void displayInfo() {
         infoLabel.setText(InfoFormatter.cellInfo(cell));
         this.setToolTipText(InfoFormatter.cellToolTip(cell));
@@ -62,10 +80,16 @@ public class CellGUI extends JPanel {
         this.repaint();
     }
 
+/**
+ * Method getCell: Description of its purpose.
+ */
     public Cell getCell() {
         return cell;
     }
 
+/**
+ * Method removePlayer: Description of its purpose.
+ */
     public void removePlayer(int index) {
         playersLabel[index].setText("");
         playersLabel[index].setOpaque(false);

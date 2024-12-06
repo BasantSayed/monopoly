@@ -18,6 +18,9 @@ import monopoly.Cell;
 import monopoly.MainController;
 import monopoly.Player;
 
+/**
+ * Class PlayerPanel: Description of its purpose.
+ */
 public class PlayerPanel extends JPanel {
     private static final long serialVersionUID = -86435279085524828L;
 
@@ -33,6 +36,9 @@ public class PlayerPanel extends JPanel {
     private final JButton rollDiceButton;
     private final JButton tradeButton;
 
+/**
+ * Method PlayerPanel: Description of its purpose.
+ */
     public PlayerPanel(MainController mainController, Player player) {
         JPanel actionPanel = new JPanel();
         JPanel infoPanel = new JPanel();
@@ -127,6 +133,9 @@ public class PlayerPanel extends JPanel {
         });
     }
 
+/**
+ * Method displayInfo: Description of its purpose.
+ */
     public final void displayInfo() {
         nameLabel.setText(player.getName());
         moneyLabel.setText("$ " + player.getMoney());
@@ -138,46 +147,79 @@ public class PlayerPanel extends JPanel {
         propertyText.setText(buf.toString());
     }
 
+/**
+ * Method isDrawCardButtonEnabled: Description of its purpose.
+ */
     public boolean isDrawCardButtonEnabled() {
         return drawCardButton.isEnabled();
     }
 
+/**
+ * Method isEndTurnButtonEnabled: Description of its purpose.
+ */
     public boolean isEndTurnButtonEnabled() {
         return endTurnButton.isEnabled();
     }
     
+/**
+ * Method isGetOutOfJailButtonEnabled: Description of its purpose.
+ */
     public boolean isGetOutOfJailButtonEnabled() {
         return getOutOfJailButton.isEnabled();
     }
     
+/**
+ * Method isTradeButtonEnabled: Description of its purpose.
+ */
     public boolean isTradeButtonEnabled() {
         return tradeButton.isEnabled();
     }
 
+/**
+ * Method setBuyHouseEnabled: Description of its purpose.
+ */
     public void setBuyHouseEnabled(boolean enabled) {
         buyHouseButton.setEnabled(enabled);
     }
 
+/**
+ * Method setDrawCardEnabled: Description of its purpose.
+ */
     public void setDrawCardEnabled(boolean enabled) {
         drawCardButton.setEnabled(enabled);
     }
 
+/**
+ * Method setEndTurnEnabled: Description of its purpose.
+ */
     public void setEndTurnEnabled(boolean enabled) {
         endTurnButton.setEnabled(enabled);
     }
 
+/**
+ * Method setGetOutOfJailEnabled: Description of its purpose.
+ */
     public void setGetOutOfJailEnabled(boolean enabled) {
         getOutOfJailButton.setEnabled(enabled);
     }
 
+/**
+ * Method setPurchasePropertyEnabled: Description of its purpose.
+ */
     public void setPurchasePropertyEnabled(boolean enabled) {
         purchasePropertyButton.setEnabled(enabled);
     }
 
+/**
+ * Method setRollDiceEnabled: Description of its purpose.
+ */
     public void setRollDiceEnabled(boolean enabled) {
         rollDiceButton.setEnabled(enabled);
     }
 
+/**
+ * Method setTradeEnabled: Description of its purpose.
+ */
     public void setTradeEnabled(boolean b) {
         tradeButton.setEnabled(b);
     }

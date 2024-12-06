@@ -14,7 +14,13 @@ import monopoly.cells.UtilityCell;
 import monopoly.enums.CardType;
 import monopoly.enums.ColorGroup;
 
+/**
+ * Class GameBoardDefault: Description of its purpose.
+ */
 public class GameBoardDefault extends GameBoard {
+/**
+ * Method GameBoardDefault: Description of its purpose.
+ */
     public GameBoardDefault() {
         super();
         

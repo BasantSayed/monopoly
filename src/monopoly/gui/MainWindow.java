@@ -22,6 +22,9 @@ import monopoly.RespondDialog;
 import monopoly.TradeDeal;
 import monopoly.TradeDialog;
 
+/**
+ * Class MainWindow: Description of its purpose.
+ */
 public class MainWindow extends JFrame implements MonopolyGUI {
     private static final long serialVersionUID = 3146365872410925008L;
     private final JPanel eastPanel = new JPanel();
@@ -32,6 +35,9 @@ public class MainWindow extends JFrame implements MonopolyGUI {
     private final JPanel southPanel = new JPanel();
     private final JPanel westPanel = new JPanel();
 
+/**
+ * Method MainWindow: Description of its purpose.
+ */
     public MainWindow(MainController mainCtl) {
         this.mainController = mainCtl;
         
@@ -51,12 +57,18 @@ public class MainWindow extends JFrame implements MonopolyGUI {
 
         super.addWindowListener(new WindowAdapter(){
             @Override
+/**
+ * Method windowClosing: Description of its purpose.
+ */
             public void windowClosing(WindowEvent e) {
                     System.exit(0);
             }
         });
     }
 
+/**
+ * Method addCells: Description of its purpose.
+ */
     private void addCells(JPanel panel, List<Cell> cells) {
         cells.stream().map((cell) -> new CellGUI(cell)).map((guiCell) -> {
                                         panel.add(guiCell);
@@ -66,6 +78,9 @@ public class MainWindow extends JFrame implements MonopolyGUI {
                                     });
     }
 
+/**
+ * Method buildPlayerPanels: Description of its purpose.
+ */
     private void buildPlayerPanels() {
         JPanel infoPanel = new JPanel();
         int players = mainController.getNumberOfPlayers();
@@ -79,6 +94,9 @@ public class MainWindow extends JFrame implements MonopolyGUI {
         }
     }
 	
+/**
+ * Method queryCell: Description of its purpose.
+ */
     private CellGUI queryCell(int index) {
         Cell cell = mainController.getGameBoard().getCell(index);
             for (Object guiCell1 : guiCells) {
@@ -89,6 +107,9 @@ public class MainWindow extends JFrame implements MonopolyGUI {
         return null;
     }
 	
+/**
+ * Method setupGameBoard: Description of its purpose.
+ */
     public void setupGameBoard(GameBoard board) {
         Dimension dimension = GameBoardUtil.calculateDimension(board.getCellSize());
         northPanel.setLayout(new GridLayout(1, dimension.width + 2));
@@ -103,44 +124,68 @@ public class MainWindow extends JFrame implements MonopolyGUI {
     }
 
     @Override
+/**
+ * Method enableEndTurnButton: Description of its purpose.
+ */
     public void enableEndTurnButton(int playerIndex) {
         playerPanels[playerIndex].setEndTurnEnabled(true);
     }
 
     @Override
+/**
+ * Method enablePlayerTurn: Description of its purpose.
+ */
     public void enablePlayerTurn(int playerIndex) {
         playerPanels[playerIndex].setRollDiceEnabled(true);
     }
 
     @Override
+/**
+ * Method enablePurchaseButton: Description of its purpose.
+ */
     public void enablePurchaseButton(int playerIndex) {
         playerPanels[playerIndex].setPurchasePropertyEnabled(true);
     }
 
     @Override
+/**
+ * Method isDrawCardButtonEnabled: Description of its purpose.
+ */
     public boolean isDrawCardButtonEnabled() {
         int currentPlayerIndex = mainController.getTurn();
         return playerPanels[currentPlayerIndex].isDrawCardButtonEnabled();
     }
 
     @Override
+/**
+ * Method isEndTurnButtonEnabled: Description of its purpose.
+ */
     public boolean isEndTurnButtonEnabled() {
         int currentPlayerIndex = mainController.getTurn();
         return playerPanels[currentPlayerIndex].isEndTurnButtonEnabled();
     }
 
     @Override
+/**
+ * Method isGetOutOfJailButtonEnabled: Description of its purpose.
+ */
     public boolean isGetOutOfJailButtonEnabled() {
         int currentPlayerIndex = mainController.getTurn();
         return playerPanels[currentPlayerIndex].isGetOutOfJailButtonEnabled();
     }
 
     @Override
+/**
+ * Method isTradeButtonEnabled: Description of its purpose.
+ */
     public boolean isTradeButtonEnabled(int i) {
         return playerPanels[i].isTradeButtonEnabled();
     }
 	
     @Override
+/**
+ * Method movePlayer: Description of its purpose.
+ */
     public void movePlayer(int index, int from, int to) {
         CellGUI fromCell = queryCell(from);
         CellGUI toCell = queryCell(to);
@@ -149,6 +194,9 @@ public class MainWindow extends JFrame implements MonopolyGUI {
     }
 
     @Override
+/**
+ * Method openRespondDialog: Description of its purpose.
+ */
     public RespondDialog openRespondDialog(TradeDeal deal) {
         int sellerIdx = mainController.getPlayerIndex(deal.getSeller());
         RespondDialogGUI dialog = new RespondDialogGUI(playerPanels[sellerIdx]);
@@ -158,6 +206,9 @@ public class MainWindow extends JFrame implements MonopolyGUI {
     }
 
     @Override
+/**
+ * Method openTradeDialog: Description of its purpose.
+ */
     public TradeDialog openTradeDialog() {
         TradeDialogGUI dialog = new TradeDialogGUI(mainController, this);
         dialog.setVisible(true);
@@ -165,53 +216,80 @@ public class MainWindow extends JFrame implements MonopolyGUI {
     }
 
     @Override
+/**
+ * Method removePlayer: Description of its purpose.
+ */
     public void removePlayer(int index, int from) {
         CellGUI cell = queryCell(from);
         cell.removePlayer(index);
     }
     
     @Override
+/**
+ * Method setBuyHouseEnabled: Description of its purpose.
+ */
     public void setBuyHouseEnabled(boolean enabled) {
         int currentPlayerIndex = mainController.getTurn();
         playerPanels[currentPlayerIndex].setBuyHouseEnabled(enabled);
     }
 
     @Override
+/**
+ * Method setDrawCardEnabled: Description of its purpose.
+ */
     public void setDrawCardEnabled(boolean enabled) {
         int currentPlayerIndex = mainController.getTurn();
         playerPanels[currentPlayerIndex].setDrawCardEnabled(enabled);
     }
 
     @Override
+/**
+ * Method setEndTurnEnabled: Description of its purpose.
+ */
     public void setEndTurnEnabled(boolean enabled) {
         int currentPlayerIndex = mainController.getTurn();
         playerPanels[currentPlayerIndex].setEndTurnEnabled(enabled);
     }
 
     @Override
+/**
+ * Method setGetOutOfJailEnabled: Description of its purpose.
+ */
     public void setGetOutOfJailEnabled(boolean enabled) {
         int currentPlayerIndex = mainController.getTurn();
         playerPanels[currentPlayerIndex].setGetOutOfJailEnabled(enabled);
     }
 
     @Override
+/**
+ * Method setPurchasePropertyEnabled: Description of its purpose.
+ */
     public void setPurchasePropertyEnabled(boolean enabled) {
         int currentPlayerIndex = mainController.getTurn();
         playerPanels[currentPlayerIndex].setPurchasePropertyEnabled(enabled);
     }
 
     @Override
+/**
+ * Method setRollDiceEnabled: Description of its purpose.
+ */
     public void setRollDiceEnabled(boolean enabled) {
         int currentPlayerIndex = mainController.getTurn();
         playerPanels[currentPlayerIndex].setRollDiceEnabled(enabled);
     }
 
     @Override
+/**
+ * Method setTradeEnabled: Description of its purpose.
+ */
     public void setTradeEnabled(int index, boolean enabled) {
         playerPanels[index].setTradeEnabled(enabled);
     }
 
     @Override
+/**
+ * Method showBuyHouseDialog: Description of its purpose.
+ */
     public void showBuyHouseDialog(Player currentPlayer) {
         int currentPlayerIndex = mainController.getPlayerIndex(currentPlayer);
         PlayerPanel panel = playerPanels[currentPlayerIndex];
@@ -220,17 +298,26 @@ public class MainWindow extends JFrame implements MonopolyGUI {
     }
 
     @Override
+/**
+ * Method showMessage: Description of its purpose.
+ */
     public void showMessage(String message, PlayerPanel panel) {
         JOptionPane.showMessageDialog(panel, message);
     }
 
     @Override
+/**
+ * Method showUtilityDiceRoll: Description of its purpose.
+ */
     public int showUtilityDiceRoll() {
         int currentPlayerIndex = mainController.getPlayerIndex(mainController.getCurrentPlayer());
         return UtilityDiceRoll.showDialog(playerPanels[currentPlayerIndex]);
     }
 
     @Override
+/**
+ * Method startGame: Description of its purpose.
+ */
     public void startGame() {
         int numberOfPlayers = mainController.getNumberOfPlayers();
         for (int i = 0; i < numberOfPlayers; i++) {
@@ -239,6 +326,9 @@ public class MainWindow extends JFrame implements MonopolyGUI {
     }
 
     @Override
+/**
+ * Method update: Description of its purpose.
+ */
     public void update() {
         for (PlayerPanel playerPanel : playerPanels) {
             playerPanel.displayInfo();

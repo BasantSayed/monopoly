@@ -15,6 +15,9 @@ import monopoly.Player;
 import monopoly.cells.PropertyCell;
 import monopoly.enums.ColorGroup;
 
+/**
+ * Class BuyHouseDialog: Description of its purpose.
+ */
 public class BuyHouseDialog extends JDialog {
     private static final long serialVersionUID = -8707274599957567230L;
     private final JComboBox<Integer> housesCombobox;
@@ -22,6 +25,9 @@ public class BuyHouseDialog extends JDialog {
     private JComboBox<ColorGroup> monopolyCombobox;
     private final Player player;
     
+/**
+ * Method BuyHouseDialog: Description of its purpose.
+ */
     public BuyHouseDialog(MainController mainController, Player player, PlayerPanel panel) {
         this.mainController = mainController;
         this.player = player;
@@ -47,6 +53,9 @@ public class BuyHouseDialog extends JDialog {
         });
     }
 
+/**
+ * Method buildCancelButton: Description of its purpose.
+ */
     private JButton buildCancelButton() {
         JButton button = new JButton("Cancel");
         button.addActionListener((ActionEvent e) -> {
@@ -55,6 +64,9 @@ public class BuyHouseDialog extends JDialog {
         return button;
     }
 
+/**
+ * Method buildMonopolyComboBox: Description of its purpose.
+ */
     private JComboBox<ColorGroup> buildMonopolyComboBox() {
         monopolyCombobox = new JComboBox<>();
         List<ColorGroup> monopolies = mainController.getMonopolies(player);
@@ -64,6 +76,9 @@ public class BuyHouseDialog extends JDialog {
         return monopolyCombobox;
     }
 
+/**
+ * Method buildOKButton: Description of its purpose.
+ */
     private JButton buildOKButton() {
         JButton button = new JButton("OK");
         button.addActionListener((ActionEvent e) -> {
@@ -72,10 +87,16 @@ public class BuyHouseDialog extends JDialog {
         return button;
     }
 
+/**
+ * Method cancelClicked: Description of its purpose.
+ */
     private void cancelClicked() {
         this.dispose();
     }
 
+/**
+ * Method okClicked: Description of its purpose.
+ */
     private void okClicked() {
         ColorGroup monopoly = (ColorGroup)monopolyCombobox.getSelectedItem();
         int number = housesCombobox.getSelectedIndex() + 1;
@@ -83,6 +104,9 @@ public class BuyHouseDialog extends JDialog {
         this.dispose();
     }
     
+/**
+ * Method updateHousesComboBox: Description of its purpose.
+ */
     private void updateHousesComboBox(ColorGroup monopoly) {
         housesCombobox.removeAllItems();
         GameBoard gameBoard = mainController.getGameBoard();

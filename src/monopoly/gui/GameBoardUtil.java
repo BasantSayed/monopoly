@@ -6,8 +6,14 @@ import java.util.List;
 import monopoly.Cell;
 import monopoly.GameBoard;
 
+/**
+ * Class GameBoardUtil: Description of its purpose.
+ */
 public class GameBoardUtil {
     
+/**
+ * Method calculateDimension: Description of its purpose.
+ */
     public static Dimension calculateDimension(int i) {
         i = i - 4;
         int shortSide = i / 4;
@@ -15,6 +21,9 @@ public class GameBoardUtil {
         return new Dimension(longSide, shortSide);
     }
 	
+/**
+ * Method getEastCells: Description of its purpose.
+ */
     public static List<Cell> getEastCells(GameBoard board) {
         Dimension dimension = calculateDimension(board.getCellSize());
         int shortSide = dimension.height;
@@ -25,6 +34,9 @@ public class GameBoardUtil {
         return cells;
     }
 	
+/**
+ * Method getNorthCells: Description of its purpose.
+ */
     public static List<Cell> getNorthCells(GameBoard board) {
         Dimension dimension = calculateDimension(board.getCellSize());
         int longSide = dimension.width;
@@ -35,6 +47,9 @@ public class GameBoardUtil {
         return cells;
     }
 	
+/**
+ * Method getSouthCells: Description of its purpose.
+ */
     public static List<Cell> getSouthCells(GameBoard board) {
         Dimension dimension = calculateDimension(board.getCellSize());
         int longSide = dimension.width;
@@ -44,6 +59,9 @@ public class GameBoardUtil {
         return cells;
     }
 
+/**
+ * Method getWestCells: Description of its purpose.
+ */
     public static List<Cell> getWestCells(GameBoard board) {
         Dimension dimension = calculateDimension(board.getCellSize());
         int longSide = dimension.width;

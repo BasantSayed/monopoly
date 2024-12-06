@@ -9,6 +9,9 @@ import monopoly.gameboards.GameBoardDefault;
 import monopoly.gui.MonopolyGUI;
 import monopoly.gui.PlayerPanel;
 
+/**
+ * Class MainController: Description of its purpose.
+ */
 public class MainController {
     private final BoardController boardController;
 
@@ -18,6 +21,9 @@ public class MainController {
     private final PropertyController propertyController;
     private int utilityDiceRoll;
     
+/**
+ * Method MainController: Description of its purpose.
+ */
     public MainController() {
         gameBoard = new GameBoardDefault();
         boardController = new BoardController(gameBoard);
@@ -25,10 +31,16 @@ public class MainController {
         dice = new Dice(2);
     }
 
+/**
+ * Method buttonBuyHouseClicked: Description of its purpose.
+ */
     public void buttonBuyHouseClicked() {
         gui.showBuyHouseDialog(getCurrentPlayer());
     }
 
+/**
+ * Method buttonDrawCardClicked: Description of its purpose.
+ */
     public Card buttonDrawCardClicked() {
         gui.setDrawCardEnabled(false);
         CardCell cell = (CardCell)getCurrentPlayer().getPosition();
@@ -44,6 +56,9 @@ public class MainController {
         return card;
     }
 
+/**
+ * Method buttonEndTurnClicked: Description of its purpose.
+ */
     public void buttonEndTurnClicked() {
         setAllButtonEnabled(false);
         getCurrentPlayer().getPosition().playAction(this);
@@ -56,6 +71,9 @@ public class MainController {
         gui.update();
     }
 
+/**
+ * Method buttonGetOutOfJailClicked: Description of its purpose.
+ */
     public void buttonGetOutOfJailClicked() {
         getOutOfJail();
         if (getCurrentPlayer().isBankrupt()) {
@@ -74,12 +92,18 @@ public class MainController {
         }
     }
 
+/**
+ * Method buttonPurchasePropertyClicked: Description of its purpose.
+ */
     public void buttonPurchasePropertyClicked() {
         purchase();
         gui.setPurchasePropertyEnabled(false);
         gui.update();
     }
     
+/**
+ * Method buttonRollDiceClicked: Description of its purpose.
+ */
     public void buttonRollDiceClicked(PlayerPanel panel) {
         dice.roll();
         if ((dice.getTotal()) > 0) {
@@ -96,6 +120,9 @@ public class MainController {
         }
     }
 
+/**
+ * Method buttonTradeClicked: Description of its purpose.
+ */
     public void buttonTradeClicked() {
         TradeDialog dialog = gui.openTradeDialog();
         TradeDeal deal = dialog.getTradeDeal(this);
@@ -108,23 +135,38 @@ public class MainController {
         }
     }
     
+/**
+ * Method canBuyHouse: Description of its purpose.
+ */
     public boolean canBuyHouse() {
         return propertyController.canBuyHouse();
     }
 
+/**
+ * Method completeTrade: Description of its purpose.
+ */
     public void completeTrade(TradeDeal deal) {
         propertyController.sellProperty(deal);
         propertyController.buyProperty(deal);
     }
 
+/**
+ * Method drawCCCard: Description of its purpose.
+ */
     public Card drawCCCard() {
         return gameBoard.drawCCCard();
     }
 
+/**
+ * Method drawChanceCard: Description of its purpose.
+ */
     public Card drawChanceCard() {
         return gameBoard.drawChanceCard();
     }
     
+/**
+ * Method finishPlayerMove: Description of its purpose.
+ */
     private void finishPlayerMove(Player player) {
         Cell cell = player.getPosition();
         int playerIndex = getPlayerIndex(player);
@@ -141,30 +183,51 @@ public class MainController {
         gui.setTradeEnabled(boardController.getTurn(), false);
     }
 
+/**
+ * Method getCurrentPlayer: Description of its purpose.
+ */
     public Player getCurrentPlayer() {
         return boardController.getCurrentPlayer();
     }
     
+/**
+ * Method getDice: Description of its purpose.
+ */
     public Dice getDice() {
         return dice;
     }
 
+/**
+ * Method getGUI: Description of its purpose.
+ */
     public MonopolyGUI getGUI() {
         return gui;
     }
     
+/**
+ * Method getGameBoard: Description of its purpose.
+ */
     public GameBoard getGameBoard() {
         return gameBoard;
     }
     
+/**
+ * Method getMonopolies: Description of its purpose.
+ */
     public List<ColorGroup> getMonopolies(Player player) {
         return propertyController.getMonopolies(player);
     }
 
+/**
+ * Method getNumberOfPlayers: Description of its purpose.
+ */
     public int getNumberOfPlayers() {
         return boardController.getNumberOfPlayers();
     }
     
+/**
+ * Method getOutOfJail: Description of its purpose.
+ */
     private void getOutOfJail() {
         Player currentPlayer = boardController.getCurrentPlayer();
         currentPlayer.subtractMoney(JailCell.BAIL);
@@ -176,30 +239,51 @@ public class MainController {
         gui.update();
     }
 
+/**
+ * Method getPlayer: Description of its purpose.
+ */
     public Player getPlayer(int index) {
         return boardController.getPlayer(index);
     }
 
+/**
+ * Method getPlayerIndex: Description of its purpose.
+ */
     public int getPlayerIndex(Player player) {
         return boardController.getPlayerIndex(player);
     }
 
+/**
+ * Method getSellerList: Description of its purpose.
+ */
     public List<Player> getSellerList() {
         return propertyController.getSellerList();
     }
     
+/**
+ * Method getTurn: Description of its purpose.
+ */
     public int getTurn() {
         return boardController.getTurn();
     }
 
+/**
+ * Method getUtilityDiceRoll: Description of its purpose.
+ */
     public int getUtilityDiceRoll() {
         return this.utilityDiceRoll;
     }
     
+/**
+ * Method giveAllProperties: Description of its purpose.
+ */
     public void giveAllProperties(Player fromPlayer, Player toPlayer) {
         propertyController.giveAllProperties(fromPlayer, toPlayer);
     }
 
+/**
+ * Method movePlayer: Description of its purpose.
+ */
     public void movePlayer(Player player, int diceValue) {
         int positionIndex = boardController.getCurrentPositionIndex(player);
         int newIndex = boardController.getNewPositionIndex(positionIndex, diceValue);
@@ -211,25 +295,40 @@ public class MainController {
         gui.update();
     }
     
+/**
+ * Method payRentTo: Description of its purpose.
+ */
     public void payRentTo(Player owner, int rent) {
         propertyController.payRentTo(owner, rent);
     }
     
+/**
+ * Method purchase: Description of its purpose.
+ */
     public void purchase() {
         propertyController.purchase();
     }
     
+/**
+ * Method purchaseHouse: Description of its purpose.
+ */
     public void purchaseHouse(ColorGroup selectedMonopoly, int houses) {
         if (propertyController.purchaseHouse(selectedMonopoly, houses) <= 5)
             gui.update();
     }
 
+/**
+ * Method reset: Description of its purpose.
+ */
     public void reset() {
         boardController.reset();
         if (gameBoard != null)
             gameBoard.removeCards();
     }
 	
+/**
+ * Method sendToJail: Description of its purpose.
+ */
     public void sendToJail(Player player) {
         String currentPlayerName = getCurrentPlayer().getPosition().getName();
         int oldPosition = gameBoard.queryCellIndex(currentPlayerName);
@@ -239,6 +338,9 @@ public class MainController {
         gui.movePlayer(getPlayerIndex(player), oldPosition, jailIndex);
     }
     
+/**
+ * Method setAllButtonEnabled: Description of its purpose.
+ */
     private void setAllButtonEnabled(boolean enabled) {
         gui.setRollDiceEnabled(enabled);
         gui.setPurchasePropertyEnabled(enabled);
@@ -249,25 +351,40 @@ public class MainController {
         gui.setGetOutOfJailEnabled(enabled);
     }
     
+/**
+ * Method setGUI: Description of its purpose.
+ */
     public void setGUI(MonopolyGUI gui) {
         this.gui = gui;
     }
 
+/**
+ * Method setGameBoard: Description of its purpose.
+ */
     public void setGameBoard(GameBoard board) {
         this.gameBoard = board;
         boardController.setGameBoard(board);
     }
 
+/**
+ * Method setNumberOfPlayers: Description of its purpose.
+ */
     public void setNumberOfPlayers(int number) {
         boardController.setNumberOfPlayers(number);
     }
 
+/**
+ * Method startGame: Description of its purpose.
+ */
     public void startGame() {
         gui.startGame();
         gui.enablePlayerTurn(0);
         gui.setTradeEnabled(0, true);
     }
 
+/**
+ * Method switchTurn: Description of its purpose.
+ */
     public void switchTurn() {
         boardController.switchTurn();
         
@@ -288,6 +405,9 @@ public class MainController {
         }
     }
 
+/**
+ * Method utilityRollDice: Description of its purpose.
+ */
     public void utilityRollDice() {
         this.utilityDiceRoll = gui.showUtilityDiceRoll();
     }

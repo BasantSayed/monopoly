@@ -9,15 +9,24 @@ import monopoly.cells.RailRoadCell;
 import monopoly.cells.UtilityCell;
 import monopoly.enums.ColorGroup;
 
+/**
+ * Class PropertyController: Description of its purpose.
+ */
 public class PropertyController {
     private final BoardController boardController;
     private final GameBoard gameBoard;
     
+/**
+ * Method PropertyController: Description of its purpose.
+ */
     public PropertyController(BoardController boardController) {
         this.boardController = boardController;
         this.gameBoard = boardController.getGameBoard();
     }
 
+/**
+ * Method buyProperty: Description of its purpose.
+ */
     public void buyProperty(TradeDeal deal) {
         Cell property = deal.getProperty();
         Player buyer = deal.getBuyer();
@@ -37,10 +46,16 @@ public class PropertyController {
         buyer.subtractMoney(deal.getAmount());
     }
     
+/**
+ * Method canBuyHouse: Description of its purpose.
+ */
     public boolean canBuyHouse() {
         return (!getMonopolies(boardController.getCurrentPlayer()).isEmpty());
     }
     
+/**
+ * Method doublePropertyRent: Description of its purpose.
+ */
     private void doublePropertyRent(ColorGroup colorGroup) {
         List<PropertyCell> properties = gameBoard.getPropertiesInMonopoly(colorGroup);
         
@@ -49,6 +64,9 @@ public class PropertyController {
         });
     }
     
+/**
+ * Method getMonopolies: Description of its purpose.
+ */
     public List<ColorGroup> getMonopolies(Player player) {
         Map<ColorGroup, Integer> propertyColors = player.getPropertyColors();
         List<ColorGroup> monopolies = new ArrayList<>();
@@ -66,6 +84,9 @@ public class PropertyController {
         return monopolies;
     }
     
+/**
+ * Method getSellerList: Description of its purpose.
+ */
     public List<Player> getSellerList() {
         List<Player> sellers = new ArrayList<>();
         boardController.getPlayers().stream().filter((player) ->
@@ -75,6 +96,9 @@ public class PropertyController {
         return sellers;
     }
     
+/**
+ * Method giveAllProperties: Description of its purpose.
+ */
     public void giveAllProperties(Player fromPlayer, Player toPlayer) {
         List<PropertyCell> properties = fromPlayer.getPropertyCells();
         List<RailRoadCell> railroads = fromPlayer.getRailRoadCells();
@@ -116,6 +140,9 @@ public class PropertyController {
         utilities.clear();
     }
 	
+/**
+ * Method payRentTo: Description of its purpose.
+ */
     public void payRentTo(Player owner, int rentValue) {
         Player currentPlayer = boardController.getCurrentPlayer();
         int playerMoney = currentPlayer.getMoney();
@@ -134,6 +161,9 @@ public class PropertyController {
         }
     }
     
+/**
+ * Method purchase: Description of its purpose.
+ */
     public void purchase() {
         Player currentPlayer = boardController.getCurrentPlayer();
         
@@ -145,6 +175,9 @@ public class PropertyController {
         }
     }
     
+/**
+ * Method purchaseHouse: Description of its purpose.
+ */
     public int purchaseHouse(ColorGroup selectedMonopoly, int houses) {
         Player currentPlayer = boardController.getCurrentPlayer();
         
@@ -164,6 +197,9 @@ public class PropertyController {
         return numOfHouses;
     }
     
+/**
+ * Method resetPropertyRent: Description of its purpose.
+ */
     private void resetPropertyRent(ColorGroup colorGroup) {
         List<PropertyCell> properties = gameBoard.getPropertiesInMonopoly(colorGroup);
         
@@ -172,6 +208,9 @@ public class PropertyController {
         });
     }
     
+/**
+ * Method sellProperty: Description of its purpose.
+ */
     public void sellProperty(TradeDeal deal) {
         Player seller = deal.getSeller();
         Cell property = deal.getProperty();
@@ -188,6 +227,9 @@ public class PropertyController {
         seller.addMoney(deal.getAmount());
     }
     
+/**
+ * Method updatePropertyRent: Description of its purpose.
+ */
     private void updatePropertyRent(PropertyCell property) {
         int previousRent = property.getRent();
         int numHouses = property.getNumHouses();
@@ -208,6 +250,9 @@ public class PropertyController {
         }
     }
 
+/**
+ * Method updateRailRoadRent: Description of its purpose.
+ */
     private void updateRailRoadRent(RailRoadCell railroad) {
         Player owner = railroad.getOwner();
         int basePrice = railroad.getBaseRent();
