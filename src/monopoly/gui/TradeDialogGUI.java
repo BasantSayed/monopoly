@@ -25,6 +25,9 @@ import monopoly.Player;
 import monopoly.TradeDeal;
 import monopoly.TradeDialog;
 
+/**
+ * Class TradeDialogGUI: Description of its purpose.
+ */
 public class TradeDialogGUI extends JDialog implements TradeDialog {
     private static final long serialVersionUID = -7231996263338389498L;
     private JButton cancelButton;
@@ -35,6 +38,9 @@ public class TradeDialogGUI extends JDialog implements TradeDialog {
     private TradeDeal deal;
     private JTextField amountText;
     
+/**
+ * Method TradeDialogGUI: Description of its purpose.
+ */
     public TradeDialogGUI(MainController mainController, Frame parent) {
         super(parent);
         int xOffset = 125;
@@ -76,6 +82,9 @@ public class TradeDialogGUI extends JDialog implements TradeDialog {
         sellersCombobox.setRenderer(new DefaultListCellRenderer() {
             private static final long serialVersionUID = -5460014450312978883L;
             @Override
+/**
+ * Method getListCellRendererComponent: Description of its purpose.
+ */
             public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
                 Component ret = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
                 if (isSelected || cellHasFocus) {
@@ -89,18 +98,27 @@ public class TradeDialogGUI extends JDialog implements TradeDialog {
 
         PopupMenuListener listener = new PopupMenuListener() {
             @Override
+/**
+ * Method popupMenuWillBecomeVisible: Description of its purpose.
+ */
             public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
                 Color defaultColor = new Color(238, 238, 238);
                 sellersCombobox.setBorder(new LineBorder(defaultColor, comboboxBorderSize));
                 sellersCombobox.setBackground(defaultColor);
             }
             @Override
+/**
+ * Method popupMenuWillBecomeInvisible: Description of its purpose.
+ */
             public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
                 Player player = (Player)sellersCombobox.getSelectedItem();
                 sellersCombobox.setBorder(new LineBorder(player.getPlayerColor(), comboboxBorderSize));
                 sellersCombobox.setBackground(player.getPlayerColor());
             }
             @Override
+/**
+ * Method popupMenuCanceled: Description of its purpose.
+ */
             public void popupMenuCanceled(PopupMenuEvent e) {}
         };
 
@@ -139,6 +157,9 @@ public class TradeDialogGUI extends JDialog implements TradeDialog {
         super.pack();
     }
 
+/**
+ * Method buildSellersComboBox: Description of its purpose.
+ */
     private void buildSellersComboBox(MainController mainCtl) {
         List<Player> sellers = mainCtl.getSellerList();
         sellers.stream().forEach((player) -> {
@@ -152,6 +173,9 @@ public class TradeDialogGUI extends JDialog implements TradeDialog {
         }
     }
 
+/**
+ * Method updatePropertiesComboBox: Description of its purpose.
+ */
     private void updatePropertiesComboBox(Player player) {
         propertiesCombobox.removeAllItems();
         List<Cell> cells = player.getAllProperties();
@@ -162,6 +186,9 @@ public class TradeDialogGUI extends JDialog implements TradeDialog {
     }
 
     @Override
+/**
+ * Method getTradeDeal: Description of its purpose.
+ */
     public TradeDeal getTradeDeal(MainController mainCtl) {
         return deal;
     }

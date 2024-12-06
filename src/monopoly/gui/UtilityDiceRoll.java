@@ -9,9 +9,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import monopoly.Dice;
 
+/**
+ * Class UtilityDiceRoll: Description of its purpose.
+ */
 public class UtilityDiceRoll extends JDialog {
     private static final long serialVersionUID = -2985807932807855607L;
     
+/**
+ * Method showDialog: Description of its purpose.
+ */
     public static int showDialog(PlayerPanel panel) {
         UtilityDiceRoll dialog = new UtilityDiceRoll(panel);
         dialog.setVisible(true);
@@ -23,6 +29,9 @@ public class UtilityDiceRoll extends JDialog {
     private int diceValue;
     private final JLabel promptLabel = new JLabel();
     
+/**
+ * Method UtilityDiceRoll: Description of its purpose.
+ */
     public UtilityDiceRoll(PlayerPanel panel) {
         super.setModal(true);
         okButton.setEnabled(false);
@@ -50,10 +59,16 @@ public class UtilityDiceRoll extends JDialog {
         super.pack();
     }
 
+/**
+ * Method okClicked: Description of its purpose.
+ */
     public final void okClicked(){
         this.dispose();
     }
 
+/**
+ * Method rollDice: Description of its purpose.
+ */
     public final void rollDice() {
         Dice dice = new Dice(2);
         diceValue = dice.getTotal();

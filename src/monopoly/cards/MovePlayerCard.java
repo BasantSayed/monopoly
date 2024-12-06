@@ -6,17 +6,26 @@ import monopoly.MainController;
 import monopoly.Player;
 import monopoly.enums.CardType;
 
+/**
+ * Class MovePlayerCard: Description of its purpose.
+ */
 public class MovePlayerCard extends Card {
     
     private final String destination;
     private final CardType type;
 
+/**
+ * Method MovePlayerCard: Description of its purpose.
+ */
     public MovePlayerCard(String destination, CardType cardType) {
         this.destination = destination;
         this.type = cardType;
     }
 
     @Override
+/**
+ * Method applyAction: Description of its purpose.
+ */
     public void applyAction(MainController mainController) {
         Player currentPlayer = mainController.getCurrentPlayer();
         Cell currentPosition = currentPlayer.getPosition();
@@ -33,11 +42,17 @@ public class MovePlayerCard extends Card {
     }
 
     @Override
+/**
+ * Method getCardType: Description of its purpose.
+ */
     public CardType getCardType() {
         return type;
     }
 
     @Override
+/**
+ * Method toString: Description of its purpose.
+ */
     public String toString() {
         return "Go to " + destination;
     }

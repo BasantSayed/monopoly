@@ -4,13 +4,22 @@ import monopoly.Cell;
 import monopoly.MainController;
 import monopoly.Player;
 
+/**
+ * Class UtilityCell: Description of its purpose.
+ */
 public class UtilityCell extends Cell {
     private static int PRICE;
 
+/**
+ * Method setPrice: Description of its purpose.
+ */
     public static void setPrice(int price) {
         UtilityCell.PRICE = price;
     }
 
+/**
+ * Method getRent: Description of its purpose.
+ */
     public int getRent(int diceRoll) {
         if (player.numberOfUtilities() == 1)
                 return diceRoll * 4;
@@ -20,11 +29,17 @@ public class UtilityCell extends Cell {
     }
 
     @Override
+/**
+ * Method getPrice: Description of its purpose.
+ */
     public int getPrice() {
         return UtilityCell.PRICE;
     }
     
     @Override
+/**
+ * Method playAction: Description of its purpose.
+ */
     public void playAction(MainController mainController) {
         Player currentPlayer;
         if (isAvailable())

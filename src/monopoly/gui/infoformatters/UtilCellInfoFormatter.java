@@ -5,9 +5,15 @@ import monopoly.Player;
 import monopoly.cells.UtilityCell;
 import monopoly.gui.CellInfoFormatter;
 
+/**
+ * Class UtilCellInfoFormatter: Description of its purpose.
+ */
 public class UtilCellInfoFormatter implements CellInfoFormatter {
 
     @Override
+/**
+ * Method format: Description of its purpose.
+ */
     public String format(Cell cell) {
         StringBuilder buf = new StringBuilder();
         buf.append("<html><b><font color='olive'>")
@@ -18,6 +24,9 @@ public class UtilCellInfoFormatter implements CellInfoFormatter {
     }
     
     @Override
+/**
+ * Method formatToolTip: Description of its purpose.
+ */
     public String formatToolTip(Cell cell) {
         UtilityCell c = (UtilityCell)cell;
         StringBuilder buf = new StringBuilder();

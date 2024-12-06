@@ -11,12 +11,18 @@ import javax.swing.JTextArea;
 import monopoly.RespondDialog;
 import monopoly.TradeDeal;
 
+/**
+ * Class RespondDialogGUI: Description of its purpose.
+ */
 public class RespondDialogGUI extends JDialog implements RespondDialog {
     private static final long serialVersionUID = -992184678913164041L;
     
     private boolean response;
     private final JTextArea messageText = new JTextArea();
     
+/**
+ * Method RespondDialogGUI: Description of its purpose.
+ */
     public RespondDialogGUI(PlayerPanel playerPanel) {
         JButton yesButton = new JButton("Yes");
         JButton noButton = new JButton("No");
@@ -51,11 +57,17 @@ public class RespondDialogGUI extends JDialog implements RespondDialog {
         super.pack();
     }
     
+/**
+ * Method setDeal: Description of its purpose.
+ */
     public void setDeal(TradeDeal deal) {
         messageText.setText(deal.makeMessage());
     }
 
     @Override
+/**
+ * Method getResponse: Description of its purpose.
+ */
     public boolean getResponse() {
         return response;
     }

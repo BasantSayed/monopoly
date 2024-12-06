@@ -1,0 +1,10 @@
+monopoly
+monopoly.cards
+monopoly.cells
+monopoly.enums
+monopoly.gameboards
+monopoly.gui
+monopoly.gui.infoformatters
+tests
+tests.gameboards
+tests.mocks

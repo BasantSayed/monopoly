@@ -3,10 +3,16 @@ package monopoly.gui;
 import javax.swing.JOptionPane;
 import monopoly.*;
 
+/**
+ * Class Main: Description of its purpose.
+ */
 public class Main {
 
     private static final MainController MAIN_CONTROLLER = new MainController();
     
+/**
+ * Method inputNumberOfPlayers: Description of its purpose.
+ */
     private static int inputNumberOfPlayers(MainWindow window) {
         int numPlayers = 0;
         while(numPlayers < 2 || numPlayers > BoardController.MAX_PLAYER) {
@@ -38,6 +44,9 @@ public class Main {
         return numPlayers;
     }
 
+/**
+ * Method main: Description of its purpose.
+ */
     public static void main(String[] args) {
         MainWindow window = new MainWindow(MAIN_CONTROLLER);
         if (args.length > 0) {
