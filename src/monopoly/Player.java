@@ -11,7 +11,8 @@ import monopoly.cells.UtilityCell;
 import monopoly.enums.ColorGroup;
 
 /**
- * Class Player: Description of its purpose.
+ * Represents a player in the Monopoly game, managing player properties, money, 
+ * and game status such as jail, bankruptcy, and position on the board.
  */
 public class Player {
     private final int INITIAL_MONEY = 1500;
@@ -26,10 +27,11 @@ public class Player {
     private final Map<ColorGroup, Integer> propertyColors = new HashMap<>();
     private List<RailRoadCell> railroads = new ArrayList<>();
     private List<UtilityCell> utilities = new ArrayList<>();
-    
-/**
- * Method Player: Description of its purpose.
- */
+    /**
+     * Constructs a new player starting at a specified board position.
+     *
+     * @param position The starting position of the player on the board.
+     */
     public Player(Cell position) {
         this.position = position;
         inJail = false;
@@ -37,57 +39,71 @@ public class Player {
         playerColor = Color.GREEN;
         money = INITIAL_MONEY;
     }
-    
-/**
- * Method addMoney: Description of its purpose.
- */
+    /**
+     * Adds money to the player's balance.
+     *
+     * @param money The amount to add.
+     */
     public void addMoney(int money) {
         this.money += money;
     }
 
-/**
- * Method addProperty: Description of its purpose.
- */
+    /**
+     * Adds a property to the player's list of owned properties.
+     *
+     * @param property The property cell to add.
+     */
     public void addProperty(PropertyCell property) {
         properties.add(property);
         addPropertyColor(property.getColorGroup());
     }
     
-/**
- * Method addPropertyColor: Description of its purpose.
- */
+    /**
+     * Updates the player's ownership count for a specific color group.
+     *
+     * @param colorGroup The color group to update.
+     */
     private void addPropertyColor(ColorGroup colorGroup) {
         propertyColors.put(colorGroup, getPropertyNumberForColor(colorGroup) + 1);
     }
-    
-/**
- * Method addRailRoad: Description of its purpose.
- */
+
+    /**
+     * Adds a railroad to the player's list of owned railroads.
+     *
+     * @param railroad The railroad cell to add.
+     */
     public void addRailRoad(RailRoadCell railroad) {
         railroads.add(railroad);
         addPropertyColor(ColorGroup.RAILROAD);
     }
-    
-/**
- * Method addUtility: Description of its purpose.
- */
-    public void addUtility (UtilityCell utility) {
+
+    /**
+     * Adds a utility to the player's list of owned utilities.
+     *
+     * @param utility The utility cell to add.
+     */
+    public void addUtility(UtilityCell utility) {
         utilities.add(utility);
         addPropertyColor(ColorGroup.UTILITY);
     }
 
-/**
- * Method checkProperty: Description of its purpose.
- */
+    /**
+     * Checks if the player owns a specific property by name.
+     *
+     * @param property The name of the property to check.
+     * @return {@code true} if the player owns the property; {@code false} otherwise.
+     */
     public boolean checkProperty(String property) {
-        return properties.stream().map((propertie) -> 
-                (Cell) propertie).anyMatch((cell) -> 
-                (cell.getName().equals(property)));
+        return properties.stream()
+                .map(propertie -> (Cell) propertie)
+                .anyMatch(cell -> cell.getName().equals(property));
     }
 
-/**
- * Method getAllProperties: Description of its purpose.
- */
+    /**
+     * Retrieves all properties, railroads, and utilities owned by the player.
+     *
+     * @return A list of all owned cells.
+     */
     public List<Cell> getAllProperties() {
         List<Cell> list = new ArrayList<>();
         list.addAll(properties);

@@ -10,20 +10,22 @@ import monopoly.gui.MonopolyGUI;
 import monopoly.gui.PlayerPanel;
 
 /**
- * Class MainController: Description of its purpose.
+ * Main controller for the Monopoly game, managing game logic, player actions, 
+ * and interactions between GUI, game board, and players.
  */
 public class MainController {
-    private final BoardController boardController;
 
-    private final Dice dice;
-    private GameBoard gameBoard;
-    private MonopolyGUI gui;
-    private final PropertyController propertyController;
-    private int utilityDiceRoll;
-    
-/**
- * Method MainController: Description of its purpose.
- */
+    private final BoardController boardController; /**< Manages player positions and board logic. */
+    private final Dice dice; /**< Dice used for player movement. */
+    private GameBoard gameBoard; /**< Represents the current game board configuration. */
+    private MonopolyGUI gui; /**< GUI instance for interacting with the user. */
+    private final PropertyController propertyController; /**< Handles property-related logic. */
+    private int utilityDiceRoll; /**< Stores the result of a utility dice roll. */
+
+    /**
+     * Initializes the main controller with default settings, including the game board, 
+     * board controller, property controller, and dice.
+     */
     public MainController() {
         gameBoard = new GameBoardDefault();
         boardController = new BoardController(gameBoard);
@@ -31,9 +33,9 @@ public class MainController {
         dice = new Dice(2);
     }
 
-/**
- * Method buttonBuyHouseClicked: Description of its purpose.
- */
+    /**
+     * Handles the event when the "Buy House" button is clicked.
+     */
     public void buttonBuyHouseClicked() {
         gui.showBuyHouseDialog(getCurrentPlayer());
     }

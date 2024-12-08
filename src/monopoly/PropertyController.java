@@ -10,63 +10,80 @@ import monopoly.cells.UtilityCell;
 import monopoly.enums.ColorGroup;
 
 /**
- * Class PropertyController: Description of its purpose.
+ * The {@code PropertyController} class handles operations related to managing properties, 
+ * including purchasing, selling, and renting properties in the Monopoly game.
  */
 public class PropertyController {
+
+    /**
+     * Controller responsible for handling board interactions.
+     */
     private final BoardController boardController;
+
+    /**
+     * The game board containing all cells and properties.
+     */
     private final GameBoard gameBoard;
-    
-/**
- * Method PropertyController: Description of its purpose.
- */
+
+    /**
+     * Constructs a {@code PropertyController} to manage property-related actions.
+     *
+     * @param boardController the controller responsible for board operations.
+     */
     public PropertyController(BoardController boardController) {
         this.boardController = boardController;
         this.gameBoard = boardController.getGameBoard();
     }
 
-/**
- * Method buyProperty: Description of its purpose.
- */
+    /**
+     * Allows a player to buy a property.
+     *
+     * @param deal the trade deal containing the property and transaction details.
+     */
     public void buyProperty(TradeDeal deal) {
         Cell property = deal.getProperty();
         Player buyer = deal.getBuyer();
         property.setPlayer(buyer);
-        
+
         if (property instanceof PropertyCell) {
             buyer.addProperty((PropertyCell) property);
             updatePropertyRent((PropertyCell) property);
         }
         if (property instanceof RailRoadCell) {
             buyer.addRailRoad((RailRoadCell) property);
-            updateRailRoadRent((RailRoadCell)property);
+            updateRailRoadRent((RailRoadCell) property);
         }
         if (property instanceof UtilityCell) {
             buyer.addUtility((UtilityCell) property);
         }
         buyer.subtractMoney(deal.getAmount());
     }
-    
-/**
- * Method canBuyHouse: Description of its purpose.
- */
+
+    /**
+     * Checks if the current player can purchase houses.
+     *
+     * @return {@code true} if the player owns a monopoly; otherwise {@code false}.
+     */
     public boolean canBuyHouse() {
         return (!getMonopolies(boardController.getCurrentPlayer()).isEmpty());
     }
-    
-/**
- * Method doublePropertyRent: Description of its purpose.
- */
+
+    /**
+     * Doubles the rent of all properties in a monopoly of the given color group.
+     *
+     * @param colorGroup the color group of the monopoly.
+     */
     private void doublePropertyRent(ColorGroup colorGroup) {
         List<PropertyCell> properties = gameBoard.getPropertiesInMonopoly(colorGroup);
-        
-        properties.stream().forEach((property) -> {
-            property.setRent(property.originalRent() * 2);
-        });
+        properties.forEach(property -> property.setRent(property.originalRent() * 2));
     }
-    
-/**
- * Method getMonopolies: Description of its purpose.
- */
+
+    /**
+     * Retrieves a list of monopolies owned by a player.
+     *
+     * @param player the player whose monopolies are retrieved.
+     * @return a list of color groups representing the player's monopolies.
+     */
     public List<ColorGroup> getMonopolies(Player player) {
         Map<ColorGroup, Integer> propertyColors = player.getPropertyColors();
         List<ColorGroup> monopolies = new ArrayList<>();
