@@ -6,13 +6,17 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Class BoardController: Description of its purpose.
+ * The BoardController class manages the state and flow of the Monopoly game,
+ * including players, their positions, and turns.
  */
 public class BoardController {
+    /** Maximum number of players allowed in the game. */
     public static final int MAX_PLAYER = 8;
     
+    /** The game board containing all the cells. */
     private GameBoard gameBoard;
-    /* Colors of the players on the gameBoard */
+    
+    /** Colors assigned to players for identification. */
     private final List<Color> playerColors = new ArrayList<>(Arrays.asList(
             new Color(255, 249, 102), /* Player 1 */
             new Color(66, 134, 244),  /* Player 2 */
@@ -23,109 +27,145 @@ public class BoardController {
             new Color(206, 57, 72),   /* Player 7 */
             new Color(72, 196, 188)   /* Player 8 */
     ));
+    
+    /** Number of players who are out of the game. */
     private int outOfGamePlayers = 0;
+    
+    /** Index of the current player's turn. */
     private int playerTurnIndex = 0;
+    
+    /** List of all players in the game. */
     private final List<Player> players = new ArrayList<>();
 
-/**
- * Method BoardController: Description of its purpose.
- */
+    /**
+     * Constructor for BoardController.
+     * 
+     * @param gameBoard The game board used for the game.
+     */
     public BoardController(GameBoard gameBoard) {
         this.gameBoard = gameBoard;
     }
     
-/**
- * Method getCurrentPlayer: Description of its purpose.
- */
+    /**
+     * Gets the current player whose turn it is.
+     * 
+     * @return The current player.
+     */
     public Player getCurrentPlayer() {
         return getPlayer(playerTurnIndex);
     }
 
-/**
- * Method getCurrentPositionIndex: Description of its purpose.
- */
+    /**
+     * Gets the index of the current position of a player.
+     * 
+     * @param player The player whose position index is requested.
+     * @return The index of the player's current position on the board.
+     */
     public int getCurrentPositionIndex(Player player) {
         Cell currentPosition = player.getPosition();
         return gameBoard.queryCellIndex(currentPosition.getName());
     }
 
-/**
- * Method getGameBoard: Description of its purpose.
- */
+    /**
+     * Gets the game board associated with this controller.
+     * 
+     * @return The game board.
+     */
     public GameBoard getGameBoard() {
         return gameBoard;
     }
 
-/**
- * Method getNewPositionIndex: Description of its purpose.
- */
+    /**
+     * Calculates the new position index after a dice roll.
+     * 
+     * @param positionIndex The player's current position index.
+     * @param diceValue The value rolled on the dice.
+     * @return The new position index after the move.
+     */
     public int getNewPositionIndex(int positionIndex, int diceValue) {
         return (positionIndex + diceValue) % gameBoard.getCellSize();    
     }
 
-/**
- * Method getNumberOfPlayers: Description of its purpose.
- */
+    /**
+     * Gets the total number of players in the game.
+     * 
+     * @return The total number of players.
+     */
     public int getNumberOfPlayers() {
         return players.size();
     }
 
-/**
- * Method getOutOfGamePlayersNumber: Description of its purpose.
- */
+    /**
+     * Gets the number of players who are out of the game.
+     * 
+     * @return The count of out-of-game players.
+     */
     public int getOutOfGamePlayersNumber() {
         return outOfGamePlayers;
     }
     
-/**
- * Method getPlayer: Description of its purpose.
- */
+    /**
+     * Gets a player by their index.
+     * 
+     * @param index The index of the player.
+     * @return The player at the specified index.
+     */
     public Player getPlayer(int index) {
         return players.get(index);
     }
     
-/**
- * Method getPlayerIndex: Description of its purpose.
- */
+    /**
+     * Gets the index of a specific player.
+     * 
+     * @param player The player whose index is needed.
+     * @return The index of the player.
+     */
     public int getPlayerIndex(Player player) {
         return players.indexOf(player);
     }
     
-/**
- * Method getPlayers: Description of its purpose.
- */
+    /**
+     * Gets the list of all players.
+     * 
+     * @return The list of players.
+     */
     public List<Player> getPlayers() {
         return players;
     }
     
-/**
- * Method getTurn: Description of its purpose.
- */
+    /**
+     * Gets the index of the current turn.
+     * 
+     * @return The current turn index.
+     */
     public int getTurn() {
         return playerTurnIndex;
     }
-	
-/**
- * Method movePlayer: Description of its purpose.
- */
+    
+    /**
+     * Moves a player based on the dice value rolled.
+     * 
+     * @param player The player to move.
+     * @param diceValue The value rolled on the dice.
+     */
     public void movePlayer(Player player, int diceValue) {
         int positionIndex = getCurrentPositionIndex(player);
         int newIndex = getNewPositionIndex(positionIndex, diceValue);
         if (newIndex <= positionIndex || diceValue > gameBoard.getCellSize())
-            player.setMoney(player.getMoney() + 200);
+            player.setMoney(player.getMoney() + 200); // Passing Go bonus.
         player.setPosition(gameBoard.getCell(newIndex));
     }
     
-/**
- * Method removePlayer: Description of its purpose.
- */
+    /**
+     * Removes a player from the game.
+     */
     public void removePlayer() {
         outOfGamePlayers++;
     }
     
-/**
- * Method reset: Description of its purpose.
- */
+    /**
+     * Resets the board and player positions.
+     */
     public void reset() {    
         for (int i = 0; i < getNumberOfPlayers(); i++) {
             Player player = players.get(i);
@@ -134,16 +174,20 @@ public class BoardController {
         playerTurnIndex = 0;
     }
     
-/**
- * Method setGameBoard: Description of its purpose.
- */
+    /**
+     * Sets a new game board for the game.
+     * 
+     * @param board The new game board.
+     */
     public void setGameBoard(GameBoard board) {
         this.gameBoard = board;
     }
     
-/**
- * Method setNumberOfPlayers: Description of its purpose.
- */
+    /**
+     * Sets the number of players in the game.
+     * 
+     * @param number The number of players to set.
+     */
     public void setNumberOfPlayers(int number) {
         players.clear();
         for (int i = 0; i < number; i++) {
@@ -153,9 +197,9 @@ public class BoardController {
         }
     }
     
-/**
- * Method switchTurn: Description of its purpose.
- */
+    /**
+     * Switches the turn to the next player.
+     */
     public void switchTurn() {
         playerTurnIndex = (playerTurnIndex + 1) % getNumberOfPlayers();
     }
